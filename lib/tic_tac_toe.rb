@@ -28,24 +28,24 @@ class TicTacToe
     user_input = user_input - 1
   end
 
-  def move
-    @array[@index] = @value
+  def move(index, value)
+    @board[index] = value
   end
 
-  def position_taken?
-    if @board[@index] == " "
+  def position_taken?(index)
+    if @board[index] == " "
      false
-   elsif @board[@index] == ""
+   elsif @board[index] == ""
       false
-    elsif @board[@index] == nil
+    elsif @board[index] == nil
       false
     else
       true
     end
   end
 
-  def valid_move?
-    if @index.between?(0,8) == true && position_taken? == false
+  def valid_move?(index)
+    if index.between?(0,8) == true && position_taken? == false
       true
     else
       false
@@ -55,9 +55,9 @@ class TicTacToe
   def turn
     puts "Please enter 1-9:"
     input = gets.strip
-    @index = input_to_index(input)
+    index = input_to_index(input)
     if valid_move?
-      move(@board, @index, current_player)
+      move(index, current_player)
       display_board
     else
       turn
@@ -85,8 +85,8 @@ class TicTacToe
   def won?
     win_array = false
     WIN_COMBINATIONS.each do |array|
-      if @board[@array[0]] == "X" && @board[@array[1]] == "X" && @board[@array[2]] == "X" || @board[@array[0]] == "O" && @board[@array[1]] == "O" && @board[@array[2]] == "O"
-        win_array = @array
+      if @board[array[0]] == "X" && @board[array[1]] == "X" && @board[array[2]] == "X" || @board[array[0]] == "O" && @board[array[1]] == "O" && @board[array[2]] == "O"
+        win_array = array
       end
     end
     win_array
